@@ -11,7 +11,7 @@ const ExploreBtn = () => {
       onClick={() => console.log("link")}
     >
       <a href="#events">
-        ExploreBtn
+        Explore Events
         <Image
           src="/icons/arrow-down.svg"
           alt="arrow-down"
