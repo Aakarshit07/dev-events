@@ -1,11 +1,17 @@
 import EventCard from "@/components/EventCard";
 import ExploreBtn from "@/components/ExploreBtn";
+import { Event } from "@/database";
 import { IEvent } from "@/database";
+import connectDB from "@/lib/mongodb";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const Home = async () => {
-  const response = await fetch(`${BASE_URL}/api/events`);
-  const { events } = await response.json();
+  // const response = await fetch(`${BASE_URL}/api/events`);
+  // const { events } = await response.json();
+
+  await connectDB(); // make sure connection is established
+
+  const events = await Event.find().lean(); // or any query you want
 
   return (
     <section>

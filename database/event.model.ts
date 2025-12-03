@@ -143,11 +143,11 @@ function generateSlug(title: string): string {
 // Helper function to normalize date to ISO format (UTC-aware to prevent timezone shifts)
 function normalizeDate(dateString: string): string {
   const trimmed = dateString.trim();
-  
+
   // Detect ISO date-only format (YYYY-MM-DD) and parse as UTC to avoid local timezone interpretation
   const isoDateOnlyPattern = /^\d{4}-\d{2}-\d{2}$/;
   let date: Date;
-  
+
   if (isoDateOnlyPattern.test(trimmed)) {
     // Append time to force UTC parsing and prevent off-by-one day errors
     date = new Date(`${trimmed}T00:00:00Z`);
@@ -155,11 +155,11 @@ function normalizeDate(dateString: string): string {
     // Fall back to normal Date parsing for other formats
     date = new Date(trimmed);
   }
-  
+
   if (isNaN(date.getTime())) {
     throw new Error("Invalid date format");
   }
-  
+
   // Return YYYY-MM-DD in UTC
   return date.toISOString().split("T")[0];
 }
@@ -197,7 +197,7 @@ function normalizeTime(timeString: string): string {
 }
 
 // Create unique index on slug for better performance
-EventSchema.index({ slug: 1 }, { unique: true });
+// EventSchema.index({ slug: 1 }, { unique: true });
 
 // Create compound index for common queries
 EventSchema.index({ date: 1, mode: 1 });
