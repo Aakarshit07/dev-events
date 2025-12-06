@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { IEvent } from "@/database";
+import Bookevent from "@/components/Bookevent";
 
 type EventsDetailsPageProps = {
   params: { slug: string };
@@ -90,6 +91,8 @@ const EventsDetailsPage: React.FC<EventsDetailsPageProps> = async ({
     organizer,
   }: IEvent = event;
 
+  const bookings = 10;
+
   return (
     <section id="event">
       <div className="header">
@@ -140,6 +143,15 @@ const EventsDetailsPage: React.FC<EventsDetailsPageProps> = async ({
         {/* Right Side - Booking Form */}
         <aside className="booking">
           <p className="text-lg font-semibold">Book Event</p>
+          <div className="signup-card">
+            <h2>Book Your Spot</h2>
+            {bookings > 0 ? (
+              <p>Join {bookings} people who have already booked their spot</p>
+            ) : (
+              <p className="text-sm">Be the first to book your spot!</p>
+            )}
+            <Bookevent />
+          </div>
         </aside>
       </div>
     </section>
