@@ -4,7 +4,7 @@ import { Event } from "@/database";
 import { IEvent } from "@/database";
 import connectDB from "@/lib/mongodb";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const Home = async () => {
   // const response = await fetch(`${BASE_URL}/api/events`);
   // const { events } = await response.json();
