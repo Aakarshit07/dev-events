@@ -20,7 +20,7 @@ const Bookevent = () => {
       ) : (
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="">Email Address</label>
+            <label htmlFor="email">Email Address</label>
             <input
               type="email"
               value={email}
