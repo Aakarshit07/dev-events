@@ -34,7 +34,7 @@ const EventsDetailsWrapper = async ({
   }: IEvent = event;
 
   const bookings = 10;
-  
+
   return (
     <>
       <div className="header">
@@ -92,7 +92,7 @@ const EventsDetailsWrapper = async ({
             ) : (
               <p className="text-sm">Be the first to book your spot!</p>
             )}
-            <Bookevent />
+            <Bookevent eventId={event._id} slug={slug} />
           </div>
         </aside>
       </div>
