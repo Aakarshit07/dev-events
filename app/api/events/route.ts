@@ -27,6 +27,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    let tags = JSON.parse(formData.get("tags") as string);
+    let agenda = JSON.parse(formData.get("agenda") as string);
+
     const arrayBuffer = await imagefile.arrayBuffer();
     const imageBuffer = Buffer.from(arrayBuffer);
 
@@ -46,7 +49,7 @@ export async function POST(req: NextRequest) {
       uploadImageToCloudinary as { secure_url: string }
     ).secure_url;
 
-    const createdEvent = await Event.create(event);
+    const createdEvent = await Event.create({ ...event, tags, agenda });
 
     return NextResponse.json(
       { message: "Event Created Successfully", event: createdEvent },

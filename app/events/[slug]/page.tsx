@@ -3,6 +3,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { IEvent } from "@/database";
 import Bookevent from "@/components/Bookevent";
+import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
+import EventCard from "@/components/EventCard";
 
 type EventsDetailsPageProps = {
   params: { slug: string };
@@ -93,6 +95,8 @@ const EventsDetailsPage: React.FC<EventsDetailsPageProps> = async ({
 
   const bookings = 10;
 
+  const similarEvents: IEvent[] = await getSimilarEventsBySlug(slug);
+
   return (
     <section id="event">
       <div className="header">
@@ -130,14 +134,14 @@ const EventsDetailsPage: React.FC<EventsDetailsPageProps> = async ({
               label={audience}
             />
           </section>
-          <EventAgenda agendaItems={JSON.parse(agenda[0])} />
+          <EventAgenda agendaItems={agenda} />
 
           <section className="flex-col-gap-2">
             <h2>About the Organization</h2>
             <p>{organizer}</p>
           </section>
 
-          <EventTags tags={JSON.parse(tags[0])} />
+          <EventTags tags={tags} />
         </div>
 
         {/* Right Side - Booking Form */}
@@ -153,6 +157,16 @@ const EventsDetailsPage: React.FC<EventsDetailsPageProps> = async ({
             <Bookevent />
           </div>
         </aside>
+      </div>
+      <div className="flex w-full flex-col gap-4 pt-20">
+        <h2>Similar Events</h2>
+        <div className="events">
+          {similarEvents &&
+            similarEvents?.length > 0 &&
+            similarEvents.map((event: IEvent) => (
+              <EventCard key={event.title} {...event} />
+            ))}
+        </div>
       </div>
     </section>
   );
