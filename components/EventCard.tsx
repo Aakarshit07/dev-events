@@ -1,7 +1,7 @@
-import { IEvent } from "@/database";
 import { Event } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 const EventCard = ({ title, image, slug, location, date, time }: Event) => {
   return (
